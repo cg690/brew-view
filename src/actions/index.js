@@ -1,30 +1,42 @@
-import { FETCH_BEERS, ADD_BEER, ADD_BEER_ERR, DELETE_BEER, DELETE_BEER_ERR } from './types';
+import { 
+  FETCH_BEERS,
+  ADD_BEER,
+  ADD_BEER_ERR,
+  DELETE_BEER,
+  DELETE_BEER_ERR,
+  EDIT_BEER,
+  EDIT_BEER_ERR,
+  FETCH_BEER
+} from './types';
 import history from '../history'
-import _ from 'lodash';
+
 
 
 // import untappd, { API_KEYS } from '../api/untappd';
 
 //turning data into dictionary based of bid to make it better to work with
-export const fetchBeers = (beersData) => {
-  const dict = _.mapKeys(beersData,(data => {
-      return data.bid
-    })
-  )
-
+export const fetchBeers = (beers) => {
   return{
     type: FETCH_BEERS,
-    payload: dict
+    payload: beers
   }
 }
 
-export const addBeer = (bid, formValues) => {
+export const fetchBeer = (beer) => {
+  return {
+    type: FETCH_BEER,
+    payload: beer
+  }
+}
+
+export const addBeer = (formValues, bid) => {
   console.log("adding ", bid, " : ", formValues )
   return (dispatch, getState, getFirebase) => {
     const firestore = getFirebase().firestore();
     firestore
       .collection("beers")
-      .add({
+      .doc(bid.toString())
+      .set({
         ...formValues,
         bid: bid
       })
@@ -40,11 +52,37 @@ export const addBeer = (bid, formValues) => {
           err
         });
       });
-    history.push('/')
-  }
+      history.push('/');
+  };
+};
 
+export const editBeer = (beer) => {
+  return (dispatch, getState, getFirebase) => {
+    const firestore = getFirebase().firestore();
+    firestore
+      .collection("beers")
+      .doc(beer.id)
+      .update(
+        {
+          review: beer.review
+        }
+      )
+      .then(() => {
+        dispatch({
+          type: EDIT_BEER,
+          beer
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: EDIT_BEER_ERR,
+          err
+        });
+      });
+      history.push('/');
+  };
+};
 
-}
 
 export const selectBeer = (beer) => {
   return {
@@ -53,17 +91,17 @@ export const selectBeer = (beer) => {
   };
 };
 
-export const deleteBeer = (beer) => {
+export const deleteBeer = (bid) => {
   return (dispatch, getState, getFirebase) => {
     const firestore = getFirebase().firestore();
     firestore
       .collection("beers")
-      .doc(beer.id)
+      .doc(bid.toString())
       .delete()
       .then(() => {
         dispatch({
           type: DELETE_BEER,
-          payload: beer.bid
+          payload: bid.toString()
         });
       })
       .catch(err => {
@@ -74,4 +112,5 @@ export const deleteBeer = (beer) => {
       });
       history.push('/');
   }
+  
 }

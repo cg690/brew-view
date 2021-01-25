@@ -6,12 +6,11 @@ import { deleteBeer } from '../../actions';
 import { Button, Box } from '@chakra-ui/react';
 
 const EditBeer = (props) => {
-  console.log(props)
+  
 
   const [results, setResults] = useState({});
 
   useEffect(() => {
-    
     const search = async () => {
       const response = await untappd.get(`/beer/info/${props.match.params.bid}`, {
         params: {
@@ -27,12 +26,16 @@ const EditBeer = (props) => {
   }, [props.match.params.bid])
 
   const handleDelete = () => {
-    props.deleteBeer(props.beers[props.match.params.bid])
+    props.deleteBeer(props.match.params.bid)
   }
 
   return (
     <Box p={5}>
-      <BeerReviewForm beer={results} />
+      <BeerReviewForm
+        beer={results}
+        isAdded
+        review={props.beers[props.match.params.bid] && props.beers[props.match.params.bid].review}
+      />
       <Button bg="tomato" onClick = {handleDelete}>DELETE</Button>
     </Box>
   );

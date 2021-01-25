@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, Heading } from '@chakra-ui/react';
 import { useSpring, animated } from 'react-spring';
 
 const ReviewCard = ({beer}) => {
@@ -24,6 +24,7 @@ const ReviewCard = ({beer}) => {
       borderRadius="10px"
       borderWidth="1px"
       borderColor="gray"
+      height="180px"
       style={{ 
         opacity: props.opacity.interpolate( opacity => `${opacity}`),
         transform: props.s.interpolate(trans)
@@ -31,7 +32,7 @@ const ReviewCard = ({beer}) => {
         <Box d='flex'>
           <Image src={beer.beer.label} boxSize="75px" m={1}/>
           <Box>
-            {beer.beer.name}
+            <Heading size="sm">{beer.beer.name}</Heading>
           </Box>
         </Box>
     </AnimatedBox>

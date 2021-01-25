@@ -1,64 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import BeerList from './Beer/BeerList';
+import React from 'react'
 import BeerSearch from './Beer/BeerSearch';
 import ReviewCard from './Beer/ReviewCard';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { fetchBeers } from '../actions';
+
+import { Link as ReachLink } from "react-router-dom"
+
 
 //import { useSpring, animated } from 'react-spring';
-import { SimpleGrid, Box } from '@chakra-ui/react';
-
-import _ from 'lodash';
-
-const HomePage = ( { beers, fetchBeers } ) => {
+import { SimpleGrid, Box, Link } from '@chakra-ui/react';
 
 
-
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    fetchBeers(beers)
-    const dict = _.mapKeys(beers,(data => {
-        return data.bid
-      })
-    )
-    setData(dict)
-  },[beers, fetchBeers])
-
-  const renderCards = Object.keys(data).map((key, index) => {
-      let beer = data[key]
-      return (
-        <ReviewCard key={index} beer={beer} />
-      )
-    })
+const HomePage = ( { beers } ) => {
 
   return (
-    <Box m="auto" w="70%" p="50px">
-      <BeerList />
+    <Box m="auto" w="85%" p="50px">
       <BeerSearch />
-
-      <SimpleGrid width="100%" minChildWidth="20%" spacing="40px">
-        {renderCards}
+      <SimpleGrid width="100%" minChildWidth="200px" spacing="40px">
+        {
+          beers && Object.keys(beers).map((key, index) => {
+          let beer = beers[key]
+          if(beer){
+            return (
+              <Link as={ReachLink} to={`/beers/view/${beer.bid}`} style={{ textDecoration: "none" }}>
+                <ReviewCard key={index} beer={beer} />
+              </Link>
+              )
+            }
+            return undefined
+          })
+        }
       </SimpleGrid>
     </Box>
   )
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const beers = state.firestore.ordered.beers;
   return {
-    beers: beers
+    beers: state.beers
   };
 };
 
-export default compose(
-  connect(mapStateToProps, { fetchBeers }),
-  firestoreConnect((ownProps) => [
-    {
-      collection: 'beers'
-    }
-  ])
-)(HomePage);
+export default connect(mapStateToProps)(HomePage);
 

@@ -3,7 +3,8 @@ import {
   ADD_BEER,
   ADD_BEER_ERR,
   DELETE_BEER,
-  DELETE_BEER_ERR
+  DELETE_BEER_ERR,
+  FETCH_BEER
 } from '../actions/types';
 
 import _ from 'lodash';
@@ -15,6 +16,8 @@ export default (state = {} , action) => {
   switch(action.type){
     case FETCH_BEERS:
       return {...state, ...action.payload};
+    case FETCH_BEER:
+      return {...state, [action.payload.bid]: action.payload };
     case ADD_BEER:
       return {...state, [action.payload.bid]: action.payload };
     case ADD_BEER_ERR:

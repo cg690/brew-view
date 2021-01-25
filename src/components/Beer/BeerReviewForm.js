@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 //import { Formik } from 'formik';
 
@@ -33,6 +33,21 @@ const BeerReviewForm = (props) => {
   const [overallRank, setOverallRank] = useState(0);
   const [overallText, setOverallText] = useState('');
 
+
+  useEffect(() => {
+    if(props.review){
+      setSmellRank(props.review.smellRank)
+      setSmellText(props.review.smellText)
+      setTasteRank(props.review.tasteRank)
+      setTasteText(props.review.tasteText)
+      setFeelRank(props.review.feelRank)
+      setFeelText(props.review.feelText)
+      setOverallRank(props.review.overallRank)
+      setOverallText(props.review.overallText)
+    }
+  }, [props.review])
+
+
   
 
   const handleSubmit = (e) =>{
@@ -57,10 +72,12 @@ const BeerReviewForm = (props) => {
       tasteRank,
       tasteText,
       feelRank,
-      feelText
+      feelText,
+      overallRank,
+      overallText
     }
 
-    props.addBeer(props.beer.bid, { beer, review });
+    props.addBeer({ beer, review }, props.beer.bid);
   }
 
   //console.log(results)
@@ -70,14 +87,14 @@ const BeerReviewForm = (props) => {
       <form onSubmit={handleSubmit}>
         <Box>
           <Heading size="lg">Smell:</Heading>
-          <Slider flex='1' value={smellRank} onChange={(val) => setSmellRank(val)} max={5} step={.25}>
+          <Slider flex='1' value={smellRank || 0} onChange={(val) => setSmellRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb fontSize="sm" boxSize="30px" children={smellRank}/>
           </Slider>
           <Textarea
-            value={smellText}
+            value={smellText || ''}
             onChange={(e) => setSmellText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -87,14 +104,14 @@ const BeerReviewForm = (props) => {
 
         <Box>
           <Heading size="lg">Taste:</Heading>
-          <Slider flex='1' value={tasteRank} onChange={(val) => setTasteRank(val)} max={5} step={.25}>
+          <Slider flex='1' value={tasteRank || 0} onChange={(val) => setTasteRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb fontSize="sm" boxSize="30px" children={tasteRank}/>
           </Slider>
           <Textarea
-            value={tasteText}
+            value={tasteText || ''}
             onChange={(e) => setTasteText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -104,14 +121,14 @@ const BeerReviewForm = (props) => {
 
         <Box>
           <Heading size="lg">Feel:</Heading>
-          <Slider flex='1' value={feelRank} onChange={(val) => setFeelRank(val)} max={5} step={.25}>
+          <Slider flex='1' value={feelRank || 0} onChange={(val) => setFeelRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb fontSize="sm" boxSize="30px" children={feelRank}/>
           </Slider>
           <Textarea
-            value={feelText}
+            value={feelText || ''}
             onChange={(e) => setFeelText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -122,14 +139,14 @@ const BeerReviewForm = (props) => {
         
         <Box>
           <Heading size="lg">Overall:</Heading>
-          <Slider flex='1' value={overallRank} onChange={(val) => setOverallRank(val)} max={5} step={.1}>
+          <Slider flex='1' value={overallRank || 0} onChange={(val) => setOverallRank(val)} max={5} step={.1}>
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb fontSize="sm" boxSize="30px" children={overallRank}/>
           </Slider>
           <Textarea
-            value={overallText}
+            value={overallText || ''}
             onChange={(e) => setOverallText(e.target.value)}
             placeholder="describe..."
             size="sm"
