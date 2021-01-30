@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Heading, Text, Box, Link, Button, useMediaQuery } from '@chakra-ui/react';
+import { Image, Text, Box, Link, Button, useMediaQuery } from '@chakra-ui/react';
 import { Link as ReachLink } from "react-router-dom"
 
 
