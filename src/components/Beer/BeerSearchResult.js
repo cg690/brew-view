@@ -35,7 +35,7 @@ const BeerSearchResult = ({ beer, brewery, isAdded }) => {
   const [isSmaller] = useMediaQuery("(max-width: 800px)")
 
   return (
-    <Box d="flex" overflow="hidden" alignItems="center" fontSize={isSmaller ? "12px" : "16px" }>
+    <Box d="flex" my={2} overflow="hidden" alignItems="center" fontSize={isSmaller ? "12px" : "16px" }>
       <Image src={beer.beer_label} boxSize={isSmaller ? "75px" : "100px"}/>
       <Box pl="6" w="87%" >
         <Text fontSize="1.5em" fontWeight="bold">{beer.beer_name}</Text>

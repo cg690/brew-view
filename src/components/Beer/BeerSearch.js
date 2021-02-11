@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Stack, Box} from '@chakra-ui/react';
+import { Input, Stack, Box, StackDivider} from '@chakra-ui/react';
 
 import { connect } from 'react-redux';
 
@@ -68,7 +68,10 @@ const BeerSearch = (props) => {
       placeholder="search for a beer"
       size="md"
       />
-      <Stack spacing={4} mb="6" bg="white">
+      <Stack 
+        mb="6"
+        bg="white"
+        divider={<StackDivider borderColor="gray.200" />}>
         {renderResults}
       </Stack>
     </Box>

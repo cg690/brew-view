@@ -24,7 +24,7 @@ class App extends React.Component {
 
   render(){
     return(
-      <Box h="100vh" bgGradient="linear(to-tr, green.200, pink.500)" >
+      <Box>
         <Router history={history}>
           <Switch>
             <Route path="/" exact component={HomePage}/>
