@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react';
 
 const ViewBeer = (props) => {
   return (
-    <Box>
+    <Box color="white">
       {props.beers[props.match.params.bid].beer.name}
     </Box>
   )

@@ -17,6 +17,9 @@ const ReviewCard = ({beer}) => {
     }
   }))
 
+  //borderWidth="1px"
+  //borderColor="gray"
+  
   return (
     <AnimatedBox 
       fontSize={isSmaller ? "12px" : "16px" }
@@ -26,8 +29,7 @@ const ReviewCard = ({beer}) => {
       w="100%"
       p={2}
       borderRadius="10px"
-      borderWidth="1px"
-      borderColor="gray"
+      boxShadow="dark-lg"
       height="180px"
       style={{ 
         opacity: props.opacity.interpolate( opacity => `${opacity}`),
@@ -37,17 +39,17 @@ const ReviewCard = ({beer}) => {
           <Image src={beer.beer.label} boxSize="75px" m={1}/>
           <Box>
             <Heading size="sm" noOfLines={2}>{beer.beer.name}</Heading>
-            <Text>{beer.beer.style} - {beer.beer.abv}%</Text>
+            <Text noOfLines={2}>{beer.beer.style} - {beer.beer.abv}%</Text>
           </Box>
         </Box>
         <Text fontWeight="bold">My Review:</Text>
         <Box d="flex" py={1}>
-          <Text w="50%">smell: {beer.review.smellRank}</Text>
-          <Text>taste: {beer.review.tasteRank}</Text>
+          <Text w="50%">Smell: {beer.review.smellRank}</Text>
+          <Text>Taste: {beer.review.tasteRank}</Text>
         </Box> 
         <Box d="flex" py={1}>
-          <Text w="50%">feel: {beer.review.feelRank}</Text>
-          <Text>overall: {beer.review.overallRank}</Text>
+          <Text w="50%">Feel: {beer.review.feelRank}</Text>
+          <Text>Overall: {beer.review.overallRank}</Text>
         </Box>
 
     </AnimatedBox>

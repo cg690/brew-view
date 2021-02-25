@@ -9,6 +9,7 @@ import HomePage from './HomePage';
 import AddBeer from './Beer/AddBeer';
 import EditBeer from './Beer/EditBeer';
 import ViewBeer from './Beer/ViewBeer';
+import Header from './Header';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -25,7 +26,9 @@ class App extends React.Component {
   render(){
     return(
       <Box>
+      
         <Router history={history}>
+          <Header />
           <Switch>
             <Route path="/" exact component={HomePage}/>
             <Route path="/beers/add/:bid" exact component={AddBeer}/>

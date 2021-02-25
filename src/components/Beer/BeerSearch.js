@@ -67,6 +67,7 @@ const BeerSearch = (props) => {
       onChange={(e) => setTerm(e.target.value)}
       placeholder="search for a beer"
       size="md"
+      color="white"
       />
       <Stack 
         mb="6"
