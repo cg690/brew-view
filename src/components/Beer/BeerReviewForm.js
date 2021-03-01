@@ -86,7 +86,7 @@ const BeerReviewForm = (props) => {
     <Stack w="100%" spacing={6}>
       <form onSubmit={handleSubmit}>
         <Box>
-          <Heading size="lg">Smell:</Heading>
+          <Heading color="white" size="lg">Smell:</Heading>
           <Slider flex='1' value={smellRank || 0} onChange={(val) => setSmellRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
@@ -95,6 +95,7 @@ const BeerReviewForm = (props) => {
           </Slider>
           <Textarea
             value={smellText || ''}
+            color="white"
             onChange={(e) => setSmellText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -103,7 +104,7 @@ const BeerReviewForm = (props) => {
         </Box>
 
         <Box>
-          <Heading size="lg">Taste:</Heading>
+          <Heading color="white" size="lg">Taste:</Heading>
           <Slider flex='1' value={tasteRank || 0} onChange={(val) => setTasteRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
@@ -112,6 +113,7 @@ const BeerReviewForm = (props) => {
           </Slider>
           <Textarea
             value={tasteText || ''}
+            color="white"
             onChange={(e) => setTasteText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -120,7 +122,7 @@ const BeerReviewForm = (props) => {
         </Box>
 
         <Box>
-          <Heading size="lg">Feel:</Heading>
+          <Heading color="white" size="lg">Feel:</Heading>
           <Slider flex='1' value={feelRank || 0} onChange={(val) => setFeelRank(val)} max={5} step={.25}>
             <SliderTrack>
               <SliderFilledTrack />
@@ -129,6 +131,7 @@ const BeerReviewForm = (props) => {
           </Slider>
           <Textarea
             value={feelText || ''}
+            color="white"
             onChange={(e) => setFeelText(e.target.value)}
             placeholder="describe..."
             size="sm"
@@ -138,7 +141,7 @@ const BeerReviewForm = (props) => {
 
         
         <Box>
-          <Heading size="lg">Overall:</Heading>
+          <Heading color="white" size="lg">Overall:</Heading>
           <Slider flex='1' value={overallRank || 0} onChange={(val) => setOverallRank(val)} max={5} step={.1}>
             <SliderTrack>
               <SliderFilledTrack />
@@ -147,6 +150,7 @@ const BeerReviewForm = (props) => {
           </Slider>
           <Textarea
             value={overallText || ''}
+            color="white"
             onChange={(e) => setOverallText(e.target.value)}
             placeholder="describe..."
             size="sm"

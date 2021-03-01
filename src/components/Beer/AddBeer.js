@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import BeerReviewForm from './BeerReviewForm';
 import untappd, { API_KEYS } from '../../api/untappd';
-
-import { Box, Image, Heading, Center } from '@chakra-ui/react';
+import BeerInfo from './BeerInfo';
+import { Box } from '@chakra-ui/react';
 
 const AddBeer = (props) => {
   const [results, setResults] = useState({});
@@ -26,13 +26,7 @@ const AddBeer = (props) => {
 
   return (
     <Box p={5}>
-
-      <Image my={3} margin="auto" boxSize="250px" src={results.beer_label}/>
-      <Center>
-        <Heading color="#fc0" textAlign="center">UT Rating: {results.rating_score}</Heading>
-        <Image src="https://upload.wikimedia.org/wikipedia/commons/9/92/Untappd.svg" boxSize="50px"></Image>
-      </Center>
-      
+      <BeerInfo beer={results} />
       <BeerReviewForm beer={results}/>
     </Box>
   )
