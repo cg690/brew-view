@@ -58,7 +58,9 @@ const BeerReviewForm = (props) => {
       name: props.beer.beer_name,
       brewery: {
         brewery_id: props.beer.brewery.brewery_id,
-        brewery_name: props.beer.brewery.brewery_name
+        brewery_name: props.beer.brewery.brewery_name,
+        location: props.beer.brewery.location,
+        label: props.beer.brewery.brewery_label
       },
       abv: props.beer.beer_abv,
       desription: props.beer.beer_description,

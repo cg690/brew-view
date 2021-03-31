@@ -10,6 +10,7 @@ import AddBeer from './Beer/AddBeer';
 import EditBeer from './Beer/EditBeer';
 import ViewBeer from './Beer/ViewBeer';
 import Header from './Header';
+import BrewMap from './BrewMap';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -17,7 +18,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 
 class App extends React.Component {
-
+  
   componentDidUpdate(){
    // console.log(this.props, " component update ")
     this.props.fetchBeers(this.props.beers);
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route path="/beers/add/:bid" exact component={AddBeer}/>
             <Route path="/beers/edit/:bid" exact component={EditBeer}/>
             <Route path="/beers/view/:bid" exact component={ViewBeer}/>
+            <Route path="/map" exact component={BrewMap} />
           </Switch>      
         </Router>
       </Box>

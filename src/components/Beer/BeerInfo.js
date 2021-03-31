@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Center, Heading, Text } from '@chakra-ui/react';
+import { Image, Center, Heading, Text, Box } from '@chakra-ui/react';
 
 
 const BeerInfo = ({ beer }) => {
@@ -14,7 +14,10 @@ const BeerInfo = ({ beer }) => {
       <Heading size="xl" color="white" textAlign="center">{beer.beer_name}</Heading>
       <Heading color="grey" size="lg" textAlign="center">{beer.brewery && beer.brewery.brewery_name}</Heading>
       <Heading color="white" size="md" textAlign="center">{beer.beer_style} - {beer.beer_abv}%</Heading>
-      <Text textAlign="center" color="white">{beer.beer_description}</Text>
+      <Box m="auto" maxWidth="800px">
+        <Text textAlign="center" color="white">{beer.beer_description}</Text>
+      </Box>
+      
     </>
   )
 }
