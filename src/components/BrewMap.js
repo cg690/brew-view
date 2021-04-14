@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "./app.css";
@@ -6,22 +6,44 @@ import { Box } from '@chakra-ui/react';
 
 const BrewMap = ({beers}) => {
   //getting breweries and locations by using their info stored in beers reducer
-  // const brewArr = (brew) => {
-  //   return brew.beer.brewery
-  // }
-  // console.log(_.map(beers, brewArr))
-  //console.log(beers)
+  const [beerDict, setBeerDict] = useState({})
 
+  useEffect(() => {
+    const doStuff = () => {
+      let newBeerDict = {}
+      Object.keys(beers).forEach((beer) => {
+        console.log(beers[beer])
+        if(beers[beer].beer.brewery.brewery_id.toString() in newBeerDict){
+          newBeerDict = {
+            ...newBeerDict,
+            [beers[beer].beer.brewery.brewery_id]: [...newBeerDict[beers[beer].beer.brewery.brewery_id], beers[beer]]
+          }
+        }
+        else{
+          newBeerDict = {...newBeerDict, [beers[beer].beer.brewery.brewery_id]: [beers[beer]]}
+        }
+      })
+      setBeerDict(newBeerDict);
+    }
+    doStuff()
+  }, [beers])
 
-
-  const mapMarkers = Object.keys(beers).map( beer => {
+  const mapMarkers = Object.keys(beerDict).map( arr => {
+    console.log(beerDict[arr])
       return (
         <Marker
-          position={[beers[beer].beer.brewery.location.lat, beers[beer].beer.brewery.location.lng]} 
-          key={beer}
+          position={[beerDict[arr][0].beer.brewery.location.lat, beerDict[arr][0].beer.brewery.location.lng]} 
+          key={beerDict[arr][0].beer.brewery.brewery_id}
         >
           <Popup>
-            {beers[beer].beer.name} by {beers[beer].beer.brewery.brewery_name} <br /> Easily customizable.
+          {
+            beerDict[arr].map((beer) => {
+              return(
+                <Box key={beer.bid}>
+                  {beer.beer.name} by {beer.beer.brewery.brewery_name}
+                </Box>)
+            })
+          }
           </Popup>
         </Marker>
       )
