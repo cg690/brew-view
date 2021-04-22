@@ -10,7 +10,7 @@ import AddBeer from './Beer/AddBeer';
 import EditBeer from './Beer/EditBeer';
 import ViewBeer from './Beer/ViewBeer';
 import Header from './Header';
-import BrewMap from './BrewMap';
+import BrewMap from './BreweryMap/BrewMap';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';

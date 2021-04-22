@@ -30,7 +30,36 @@ const Header = () => {
         </Link>
 
         <Divider orientation="vertical" h="100%" color="black" />
+
         <Text color="white" p={3}>Reviews</Text>
+
+        <Divider orientation="vertical" h="100%" color="black" />
+
+        
+        <Link as={NavLink} 
+        to={"/map"}
+        mx={10} 
+        style={{
+          textDecoration: 'none',
+          outline: 'none',
+          border: 'none'
+        }}
+      >
+        <Text
+          color="white"
+          p={2}
+          
+          _hover={{
+            color: "grey"
+          }}
+        >
+        Map
+        </Text>
+      </Link>
+
+
+
+
       </Center>
     </Box>
   );

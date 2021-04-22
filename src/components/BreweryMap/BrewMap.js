@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "./app.css";
 import { Box } from '@chakra-ui/react';
+import MapCard from './MapCard';
 
 const BrewMap = ({beers}) => {
   //getting breweries and locations by using their info stored in beers reducer
@@ -12,7 +13,6 @@ const BrewMap = ({beers}) => {
     const doStuff = () => {
       let newBeerDict = {}
       Object.keys(beers).forEach((beer) => {
-        console.log(beers[beer])
         if(beers[beer].beer.brewery.brewery_id.toString() in newBeerDict){
           newBeerDict = {
             ...newBeerDict,
@@ -29,7 +29,7 @@ const BrewMap = ({beers}) => {
   }, [beers])
 
   const mapMarkers = Object.keys(beerDict).map( arr => {
-    console.log(beerDict[arr])
+    
       return (
         <Marker
           position={[beerDict[arr][0].beer.brewery.location.lat, beerDict[arr][0].beer.brewery.location.lng]} 
@@ -39,9 +39,8 @@ const BrewMap = ({beers}) => {
           {
             beerDict[arr].map((beer) => {
               return(
-                <Box key={beer.bid}>
-                  {beer.beer.name} by {beer.beer.brewery.brewery_name}
-                </Box>)
+                <MapCard key={beer.bid} beerInfo={beer} />
+              )
             })
           }
           </Popup>
